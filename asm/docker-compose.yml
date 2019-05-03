@@ -9,71 +9,6 @@ networks:
   basic:
 
 services:
-  ca.EDICUSTOMER.asn.com:
-    image: hyperledger/fabric-ca
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.EDICUSTOMER.asn.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.EDICUSTOMER.asn.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4f19d28bb96c04d89b581fda1c5bd93a177e47566cb33af773b7ce7f7ba29952_sk
-    ports:
-      - "7054:7054"
-    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-    volumes:
-      - ./crypto-config/peerOrganizations/EDICUSTOMER.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca.EDICUSTOMER.asn.com
-    networks:
-      - basic
-
-  ca.NONEDICUSTOMER.asn.com:
-    image: hyperledger/fabric-ca
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.NONEDICUSTOMER.asn.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.NONEDICUSTOMER.asn.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0fd8f786cf57ac55728f3558dae2aedcba74bac151ce80f2ccbdc5bfe174f35f_sk
-    ports:
-      - "10054:7054"
-    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-    volumes:
-      - ./crypto-config/peerOrganizations/NONEDICUSTOMER.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca.NONEDICUSTOMER.asn.com
-    networks:
-      - basic
-
-
-  ca.MAH.asn.com:
-    image: hyperledger/fabric-ca
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.MAH.asn.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.MAH.asn.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/924915f0321a242b81dab50c5bf7adfbec2c213b6271a3de060b058fd19872e4_sk
-    ports:
-      - "8054:7054"
-    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-    volumes:
-      - ./crypto-config/peerOrganizations/MAH.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca.MAH.asn.com
-    networks:
-      - basic
-
-  ca.3PL.asn.com:
-    image: hyperledger/fabric-ca
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.3PL.asn.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.3PL.asn.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/61bcb4edfe7a4953af9213fe5689c30592c25b64c6f947a8665e80a9b37adbe9_sk
-    ports:
-      - "9054:7054"
-    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-    volumes:
-      - ./crypto-config/peerOrganizations/3PL.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
-    container_name: ca.3PL.asn.com
-    networks:
-      - basic
-
   orderer.asn.com:
     container_name: orderer.asn.com
     image: hyperledger/fabric-orderer
@@ -95,6 +30,71 @@ services:
       - ./crypto-config/peerOrganizations/3PL.asn.com/peers/peer0.3PL.asn.com/:/etc/hyperledger/msp/peer3PL
       - ./crypto-config/peerOrganizations/EDICUSTOMER.asn.com/peers/peer0.EDICUSTOMER.asn.com/:/etc/hyperledger/msp/peerEDICUSTOMER
       - ./crypto-config/peerOrganizations/NONEDICUSTOMER.asn.com/peers/peer0.NONEDICUSTOMER.asn.com/:/etc/hyperledger/msp/peerNONEDICUSTOMER
+    networks:
+      - basic
+
+  ca.MAH.asn.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.MAH.asn.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.MAH.asn.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/924915f0321a242b81dab50c5bf7adfbec2c213b6271a3de060b058fd19872e4_sk
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/MAH.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.MAH.asn.com
+    networks:
+      - basic
+
+  ca.3PL.asn.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.3PL.asn.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.3PL.asn.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/61bcb4edfe7a4953af9213fe5689c30592c25b64c6f947a8665e80a9b37adbe9_sk
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/3PL.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.3PL.asn.com
+    networks:
+      - basic
+
+
+  ca.EDICUSTOMER.asn.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.EDICUSTOMER.asn.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.EDICUSTOMER.asn.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4f19d28bb96c04d89b581fda1c5bd93a177e47566cb33af773b7ce7f7ba29952_sk
+    ports:
+      - "9054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/EDICUSTOMER.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.EDICUSTOMER.asn.com
+    networks:
+      - basic
+
+  ca.NONEDICUSTOMER.asn.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.NONEDICUSTOMER.asn.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.NONEDICUSTOMER.asn.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0fd8f786cf57ac55728f3558dae2aedcba74bac151ce80f2ccbdc5bfe174f35f_sk
+    ports:
+      - "10054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/NONEDICUSTOMER.asn.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.NONEDICUSTOMER.asn.com
     networks:
       - basic
 
@@ -290,12 +290,12 @@ services:
         - ./config:/etc/hyperledger/configtx
     depends_on:
       - orderer.asn.com
-      - couchdb4
+      - couchdb3
     networks:
       - basic
 
-  couchdb4:
-    container_name: couchdb4
+  couchdb3:
+    container_name: couchdb3
     image: hyperledger/fabric-couchdb
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
@@ -339,4 +339,4 @@ services:
       - peer0.3PL.asn.com
       - couchdb2
       - peer0.NONEDICUSTOMER.asn.com
-      - couchdb4
+      - couchdb3
