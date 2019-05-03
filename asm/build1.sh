@@ -1,6 +1,6 @@
 echo "Starting network..."
 
-docker-compose -f docker-compose.yml -p asnnetwork up 
+docker-compose -f docker-compose.yml up -d
 
 sleep 30
 
